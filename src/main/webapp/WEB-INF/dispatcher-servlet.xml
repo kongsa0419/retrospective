@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/mvc
+          http://www.springframework.org/schema/mvc/spring-mvc.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="controller"/>
+    <!--    <context:component-scan base-package="domain"/>-->
+    <!--    &lt;!&ndash;    AOP &ndash;&gt;-->
+    <!--    <context:component-scan base-package="aop"/>-->
+    <!--    &lt;!&ndash; Auth   &ndash;&gt;-->
+    <!--    <context:component-scan base-package="util"/>-->
+    <!--    <aop:aspectj-autoproxy />-->
+    <!--    <context:component-scan base-package="swagger"/>-->
+
+    <!--    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>-->
+    <!--    <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>-->
+
+
+    <!--    view resolver-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--    interceptor-->
+    <!--    <mvc:interceptors>-->
+    <!--        &lt;!&ndash;        <mvc:interceptor>&ndash;&gt;-->
+    <!--        &lt;!&ndash;            <mvc:mapping path="/**" />&ndash;&gt;-->
+    <!--        &lt;!&ndash;            <bean class="interceptor.InfoInterceptor" />&ndash;&gt;-->
+    <!--        &lt;!&ndash;        </mvc:interceptor>&ndash;&gt;-->
+    <!--        <mvc:interceptor>-->
+    <!--            <mvc:mapping path="/**" />-->
+    <!--            <bean class="interceptor.AuthInterceptor" />-->
+    <!--        </mvc:interceptor>-->
+    <!--    </mvc:interceptors>-->
+
+
+</beans>
