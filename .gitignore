@@ -4,3 +4,47 @@ out/
 target/
 ./**/*.iml
 tips.txt
+**.mwb
+src/main/resources/mybatis/config.properties
+# 아닐수있음 src/main/resources/mapper/config.xml
+
+
+# ---------------------------------------------------------------------------
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### ###
+src/main/resources/application.properties
+src/main/resources/config/*
+/.mvn/

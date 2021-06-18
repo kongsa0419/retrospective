@@ -16,15 +16,15 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="controller"/>
     <!--    <context:component-scan base-package="domain"/>-->
-    <!--    &lt;!&ndash;    AOP &ndash;&gt;-->
+        <!--    AOP -->
     <!--    <context:component-scan base-package="aop"/>-->
-    <!--    &lt;!&ndash; Auth   &ndash;&gt;-->
+        <!-- Auth   -->
     <!--    <context:component-scan base-package="util"/>-->
-    <!--    <aop:aspectj-autoproxy />-->
-    <!--    <context:component-scan base-package="swagger"/>-->
+<!--        <aop:aspectj-autoproxy />-->
+        <context:component-scan base-package="swagger"/>
 
-    <!--    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>-->
-    <!--    <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>-->
+<!--        <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>-->
+<!--        <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>-->
 
 
     <!--    view resolver-->

@@ -6,9 +6,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 
-<!--    <context:component-scan base-package="service"/>-->
-<!--    <context:component-scan base-package="serviceImpl"/>-->
-<!--    <context:component-scan base-package="repository"/>-->
+    <context:component-scan base-package="service"/>
+    <context:component-scan base-package="serviceImpl"/>
+    <context:component-scan base-package="repository"/>
 <!--    <context:component-scan base-package="domain"/>-->
 <!--    <context:component-scan base-package="util"/>-->
 
