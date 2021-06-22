@@ -15,16 +15,32 @@
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="controller"/>
-    <!--    <context:component-scan base-package="domain"/>-->
+    <context:component-scan base-package="domain"/>
+
         <!--    AOP -->
     <!--    <context:component-scan base-package="aop"/>-->
-        <!-- Auth   -->
-    <!--    <context:component-scan base-package="util"/>-->
 <!--        <aop:aspectj-autoproxy />-->
+        <!-- Auth   -->
+        <context:component-scan base-package="util"/>
         <context:component-scan base-package="swagger"/>
 
-<!--        <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>-->
-<!--        <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>-->
+        <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>
+        <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>
+
+
+<!--config 설정 :  이렇게 하니까 되네-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:/application.properties</value>
+                <value>classpath*:mybatis/config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+
 
 
     <!--    view resolver-->
@@ -33,17 +49,13 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <!--    interceptor-->
-    <!--    <mvc:interceptors>-->
-    <!--        &lt;!&ndash;        <mvc:interceptor>&ndash;&gt;-->
-    <!--        &lt;!&ndash;            <mvc:mapping path="/**" />&ndash;&gt;-->
-    <!--        &lt;!&ndash;            <bean class="interceptor.InfoInterceptor" />&ndash;&gt;-->
-    <!--        &lt;!&ndash;        </mvc:interceptor>&ndash;&gt;-->
-    <!--        <mvc:interceptor>-->
-    <!--            <mvc:mapping path="/**" />-->
-    <!--            <bean class="interceptor.AuthInterceptor" />-->
-    <!--        </mvc:interceptor>-->
-    <!--    </mvc:interceptors>-->
+<!--        interceptor-->
+        <mvc:interceptors>
+            <mvc:interceptor>
+                <mvc:mapping path="/**" />
+                <bean class="interceptor.AuthInterceptor" />
+            </mvc:interceptor>
+        </mvc:interceptors>
 
 
 </beans>

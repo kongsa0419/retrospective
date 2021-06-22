@@ -5,8 +5,11 @@ target/
 ./**/*.iml
 tips.txt
 **.mwb
+del.*
 src/main/resources/mybatis/config.properties
-# 아닐수있음 src/main/resources/mapper/config.xml
+src/main/resources/application.properties
+mysql/
+retrospective.iml
 
 
 # ---------------------------------------------------------------------------
