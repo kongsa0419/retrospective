@@ -4,20 +4,71 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="repository.UserMapper">
-    <select id="getUserById" resultType="domain.User" parameterType="int">
-        select * from User where id = #{id}
+    <select id="getUserById" resultType="domain.User" parameterType="long">
+        select *
+        from User
+        where id = #{id}
     </select>
 
-    <select id="getIdByEmail" resultType="int" parameterType="String">
-        SELECT id from user where email = #{email}
+    <select id="getIdByEmail" resultType="long" parameterType="String">
+        SELECT id
+        from user
+        where email = #{email}
     </select>
 
-    <select id="getIdByPwd" resultType="int" parameterType="String">
-        SELECT id from user where password = #{pwd}
+    <select id="getIdByPwd" resultType="long" parameterType="String">
+        SELECT id
+        from user
+        where password = #{pwd}
     </select>
 
-<!--    insert 할때 변수이름 체크 잘할것... 이것떄매 시간 엄청 까먹음.-->
-    <insert id="insertNewUser" parameterType="domain.User">
-        insert into user(id, collegeid, name, tel1, tel2, tel3, residence, email, pw, attendrate, outdt) values (null, #{collegeid}, #{name}, #{tel1}, #{tel2}, #{tel3}, #{residence}, #{email}, #{pw}, null, null);
+    <select id="getIdByStdId" resultType="long" parameterType="String">
+        SELECT id
+        from user
+        where stdid = #{stdid}
+    </select>
+
+
+    <!--    insert 할때 변수이름 체크 잘할것... 이것떄매 시간 엄청 까먹음.-->
+    <insert id="signUp" parameterType="domain.User">
+        insert into user(id, stdid, name, tel, residence, email, pw, attendrate, outdt)
+        values (null, #{stdid}, #{name}, #{tel}, #{residence}, #{email}, #{pw}, null, null);
     </insert>
+
+    <update id="updateUser">
+        update user set
+        <choose>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(stdid)">
+                stdid = #{stdid}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(name)">
+                ,name = #{name}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(tel)">
+                ,tel = #{tel}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(residence)">
+                ,residence = #{residence}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(logintype)">
+                ,logintype = #{logintype}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(email)">
+                ,email = #{email}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(pw)">
+                ,pw = #{pw}
+            </when>
+        </choose>
+        where id = #{id};
+    </update>
+
+
+    <delete id="deleteUser" parameterType="long">
+        delete
+        from user
+        where id = #{userId}
+          and outdt is null;
+    </delete>
+
 </mapper>

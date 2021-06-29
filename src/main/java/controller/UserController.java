@@ -4,6 +4,7 @@ package controller;
 import annotation.Auth;
 import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,9 @@ import util.JwtUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/user")
 @Controller
-public class AuthController {
+public class UserController {
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -30,26 +31,42 @@ public class AuthController {
     @Auth
     @ResponseBody
     @RequestMapping(value = "/me", method = RequestMethod.GET)
-    public ResponseEntity getMyInfo (HttpServletRequest request){
-        return new ResponseEntity(mUserService.getMyInfo((String)request.getHeader("Authorization")), HttpStatus.OK);
+    public ResponseEntity getMe () throws IllegalAccessException {
+        return new ResponseEntity(mUserService.getMe(), HttpStatus.OK);
     }
 
-
-
-//    로그인 API : 맞으면 token을 주고 틀리면 wrong-message 리턴
+    @Auth
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity logIn(@RequestBody User user) throws Exception {
-        return new ResponseEntity(mUserService.logInValidation(user), HttpStatus.OK);
+    @RequestMapping(value = "/me", method = RequestMethod.DELETE)
+    public ResponseEntity deleteUser(){
+        return new ResponseEntity(mUserService.deleteUser(), HttpStatus.OK);
     }
 
 
 
+    //로그인 API : 맞으면 token을 주고 틀리면 wrong-message 리턴
+    @ResponseBody
+    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    public ResponseEntity signIn(@RequestBody User user) throws Exception {
+        return new ResponseEntity(mUserService.signIn(user), HttpStatus.OK);
+    }
+
+
+    //회원가입
     @ResponseBody
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity signUp(@RequestBody User user) throws Exception {
-        return new ResponseEntity(mUserService.insertNewUser(user),HttpStatus.OK);
+        return new ResponseEntity(mUserService.signUp(user),HttpStatus.OK);
     }
+
+    //정보 수정(+비번 수정)
+    @Auth
+    @ResponseBody
+    @RequestMapping(value = "/me", method = RequestMethod.PUT)
+    public ResponseEntity updateUser(@RequestBody User user){
+        return new ResponseEntity(mUserService.updateUser(user), HttpStatus.OK);
+    }
+
 
 
 }

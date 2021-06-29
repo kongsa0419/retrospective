@@ -1,9 +1,6 @@
 package domain;
 
-import enums.LoginType;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 
@@ -12,13 +9,11 @@ import java.sql.Timestamp;
 @Data
 public class User {
 
-    private int id;
-    private String collegeid;
+    private long id;
+    private String stdid;
     private Timestamp regdate;
     private String name;
-    private String tel1;
-    private String tel2;
-    private String tel3;
+    private String tel;
     private String residence;
     private byte logintype; //DB: tinyint <-> java : byte (purpose was to use enum)
     private String email;
@@ -29,3 +24,4 @@ public class User {
     private Timestamp outdt;
 
 }
+

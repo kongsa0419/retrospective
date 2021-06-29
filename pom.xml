@@ -88,6 +88,16 @@
             <version>2.8.6</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
+<!--        bCrypt 암호화-->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.3m</version>
+        </dependency>
+
+
         <!-- jasper : -->
         <!--동적인 jsp를 컴파일하기 위해 WAS(tomcat)에 깔려있는 엔진쯤으로 생각하면 되겠다.-->
         <dependency>
