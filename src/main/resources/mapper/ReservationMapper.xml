@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="repository.ReservationMapper">
+
+    <select id="getRsvListByHostId" resultType="domain.Reservation" parameterType="long">
+        select *
+        from reservation
+        where host = #{id}
+    </select>
+
+    <select id="getReservationByRsvId" resultType="domain.Reservation" parameterType="long">
+        SELECT *
+        from reservation
+        where id = #{rsvId}
+    </select>
+
+<!--    테스트할것-->
+    <insert id="createNewRsv" parameterType="domain.Reservation">
+        insert into reservation(id, host, title, description, is_deleted, createdt, modifieddt, rsvstart, rsvend)
+        values (null, #{host}, #{title}, #{description}, null, null, null, #{rsvstart}, #{rsvend});
+    </insert>
+
+    <update id="updateRsv">
+        update reservation set
+        <choose>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(host)">
+                host = #{host}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(title)">
+                ,title = #{title}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(description)">
+                ,description = #{description}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(is_deleted)">
+                ,is_deleted = #{is_deleted}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(createdt)">
+                ,createdt = #{createdt}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(modifieddt)">
+                ,modifieddt = #{modifieddt}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(rsvstart)">
+                ,rsvstart = #{rsvstart}
+            </when>
+            <when test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(rsvend)">
+                ,rsvend = #{rsvend}
+            </when>
+        </choose>
+        where id = #{id};
+    </update>
+
+
+    <delete id="deleteRsvById" parameterType="long">
+        delete
+        from reservation
+        where id = #{rsvId}
+          and is_deleted is null;
+    </delete>
+
+
+<!--    시간중복 개수 : test 필요-->
+    <select id="getCountRepeatedTime" parameterType="Timestamp" resultType="int">
+        SELECT count(*) as 'result'
+        from reservation
+        where (#{start} &lt;= rsvstart AND #{end} &gt;= rsvend)
+           OR (#{start} &gt;= rsvstart AND #{end} &lt;= rsvend)
+           OR (#{start} &gt;= rsvstart AND #{end} &gt;= rsvend)
+           OR (#{start} &lt;= rsvstart AND #{end} &lt;= rsvend) ;
+    </select>
+
+
+</mapper>
+
