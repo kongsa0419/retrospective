@@ -16,16 +16,15 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="controller"/>
     <context:component-scan base-package="domain"/>
-
-        <!--    AOP -->
+    <!--    AOP -->
     <!--    <context:component-scan base-package="aop"/>-->
 <!--        <aop:aspectj-autoproxy />-->
         <!-- Auth   -->
-        <context:component-scan base-package="util"/>
-        <context:component-scan base-package="swagger"/>
+    <context:component-scan base-package="util"/>
+    <context:component-scan base-package="swagger"/>
 
-        <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>
-        <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>
+    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>
+    <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>
 
 
 <!--config 설정 :  이렇게 하니까 되네-->
@@ -37,10 +36,6 @@
             </list>
         </property>
     </bean>
-
-
-
-
 
 
     <!--    view resolver-->

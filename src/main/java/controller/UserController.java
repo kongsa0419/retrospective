@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.UserService;
 import util.JwtUtil;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping(value = "/user")
@@ -25,6 +26,7 @@ public class UserController {
     private JwtUtil jwtUtil;
 
     @Autowired
+    @Qualifier("UserServiceImpl")
     private UserService mUserService;
 
     //토큰이 있어야만 사용가능한 api (로그인 상태). 헤더의 jwt를 파싱하므로써 데이터를 가져오는거지, 클라이언트에게 따로 body나 url로 request를 바라지 않는다.

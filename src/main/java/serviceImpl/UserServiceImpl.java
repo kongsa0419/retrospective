@@ -13,16 +13,19 @@ import repository.UserMapper;
 import service.UserService;
 import util.JwtUtil;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 
-@Service
+@Service("UserServiceImpl")
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    @Qualifier("UserMapper")
     private UserMapper mUserMapper;
 
     @Autowired
@@ -33,6 +36,11 @@ public class UserServiceImpl implements UserService {
     public User getMe() throws IllegalAccessException {
         long id = getLoginUserId();
         return mUserMapper.getUserById(id);
+    }
+
+    @Override
+    public User getUserIfExists(long userId) {
+        return mUserMapper.getUserById(userId);
     }
 
     @Override
@@ -71,6 +79,12 @@ public class UserServiceImpl implements UserService {
         String token = request.getHeader("Authorization");
         long loginId = jwtUtil.getParsedIdIfJwtValid(token);
         return loginId;
+    }
+
+    @Override
+    public boolean isUserWithdrew(long userId) {
+        Timestamp outdt = mUserMapper.getOutdt(userId);
+        return !(StringUtils.isEmpty(outdt) && (outdt ==null)); // null or ""
     }
 
     @Override

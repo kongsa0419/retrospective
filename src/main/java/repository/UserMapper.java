@@ -3,8 +3,9 @@ package repository;
 import domain.User;
 import org.springframework.stereotype.Repository;
 
-// 자잘한 처리 위주
-@Repository
+import java.sql.Timestamp;
+
+@Repository("UserMapper")
 public interface UserMapper {
     User getUserById(long id);
 
@@ -21,7 +22,8 @@ public interface UserMapper {
     //soft delete : outdt를 null이 안되게끔 함. --> outdt가 null이면 탈퇴처리된거로 간주
     int deleteUser(long userId);
 
-//    int autoUpdateUserAttendrate(long userId);
+    Timestamp getOutdt(long userId);
 
+//    int autoUpdateUserAttendrate(long userId);
 
 }

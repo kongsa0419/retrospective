@@ -14,4 +14,11 @@ Target, Retention, @interface 모두 어노테이션 클래스에 선언함
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Auth {
+
+    enum Role {ROOT, MANAGER, NORMAL}; // 시스템관리자, 개발팀원?(관리자), 일반유저
+    enum Authority {RESERVATION, BLAME, NONE}; // 글쓴이: Reservation 수정가능, 신고자: BLAME 수정가능, NONE: 조회 및 신청만 가능
+
+    Role role() default Role.NORMAL;
+    Authority authority() default Authority.NONE;
+
 }

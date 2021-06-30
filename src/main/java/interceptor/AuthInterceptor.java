@@ -2,8 +2,10 @@ package interceptor;
 
 import annotation.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import service.UserService;
 import util.JwtUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    @Qualifier("UserServiceImpl")
+    private UserService mUserService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -28,7 +33,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             return true;
         } else { // auth annotation 이 있다면
             token = request.getHeader("Authorization");
-            if ( jwtUtil.isValid(token)){
+            if ( jwtUtil.getParsedIdIfJwtValid(token)==mUserService.getLoginUserId()){ //error 난게 없으면
                 return true;
             }
             else{

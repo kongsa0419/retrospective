@@ -3,11 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="repository.UserMapper">
     <select id="getUserById" resultType="domain.User" parameterType="long">
         select *
         from User
-        where id = #{id}
+        where id = #{id} and outdt is null;
     </select>
 
     <select id="getIdByEmail" resultType="long" parameterType="String">
@@ -28,6 +29,12 @@
         where stdid = #{stdid}
     </select>
 
+
+    <select id="getOutdt" resultType="Timestamp" parameterType="long">
+        SELECT outdt
+        from user
+        where id = #{userId}
+    </select>
 
     <!--    insert 할때 변수이름 체크 잘할것... 이것떄매 시간 엄청 까먹음.-->
     <insert id="signUp" parameterType="domain.User">
