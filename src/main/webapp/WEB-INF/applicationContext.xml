@@ -6,39 +6,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <mvc:annotation-driven/>
-
-    <context:component-scan base-package="service"/>
+    <!-- Auth   -->
+    <context:component-scan base-package="util"/>
     <context:component-scan base-package="serviceImpl"/>
     <context:component-scan base-package="repository"/>
-    <context:component-scan base-package="domain"/>
-    <context:component-scan base-package="util"/>
 
-    <context:property-placeholder location="classpath*:mybatis/config.properties" />
-
-<!--    <bean id="propertyConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-<!--        <property name="locations">-->
-<!--            <list>-->
-<!--                <value>classpath*:/mybatis/config.properties</value>-->
-<!--            </list>-->
-<!--        </property>-->
-<!--    </bean>-->
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
-        <property name="url" value="${spring.datasource.url}"/>
-        <property name="username" value="${spring.datasource.username}"/>
-        <property name="password" value="${spring.datasource.password}"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:/application.properties</value>
+                <value>classpath*:mybatis/config.properties</value>
+            </list>
+        </property>
     </bean>
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath:mapper/*.xml" />
-        <!--        mybatis-config.xml-->
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
-    </bean>
-
-
-    <bean id="session" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
-    </bean>
 </beans>

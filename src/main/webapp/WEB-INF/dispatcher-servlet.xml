@@ -12,30 +12,21 @@
            http://www.springframework.org/schema/aop
             http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-
     <mvc:annotation-driven/>
     <context:component-scan base-package="controller"/>
-    <context:component-scan base-package="domain"/>
+    <context:component-scan base-package="swagger"/>
+
+
     <!--    AOP -->
     <!--    <context:component-scan base-package="aop"/>-->
 <!--        <aop:aspectj-autoproxy />-->
-        <!-- Auth   -->
-    <context:component-scan base-package="util"/>
-    <context:component-scan base-package="swagger"/>
+
 
     <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>
     <mvc:resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"></mvc:resources>
 
 
 <!--config 설정 :  이렇게 하니까 되네-->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath*:/application.properties</value>
-                <value>classpath*:mybatis/config.properties</value>
-            </list>
-        </property>
-    </bean>
 
 
     <!--    view resolver-->
@@ -51,6 +42,5 @@
                 <bean class="interceptor.AuthInterceptor" />
             </mvc:interceptor>
         </mvc:interceptors>
-
 
 </beans>

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import repository.GuestMapper;
 import repository.UserMapper;
 import service.UserService;
 import util.JwtUtil;
@@ -21,11 +20,10 @@ import java.util.*;
 import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 
-@Service("UserServiceImpl")
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    @Qualifier("UserMapper")
     private UserMapper mUserMapper;
 
     @Autowired

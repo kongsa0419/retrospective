@@ -5,6 +5,7 @@
 
 <mapper namespace="repository.ReservationMapper">
 
+
     <select id="getRsvListByHostId" resultType="domain.Reservation" parameterType="long">
         select *
         from reservation
@@ -64,7 +65,7 @@
 
 
 <!--    시간중복 개수 : test 필요-->
-    <select id="getCountRepeatedTime" parameterType="Timestamp" resultType="int">
+    <select id="getCountRepeatedTime" parameterType="java.sql.Timestamp" resultType="int">
         SELECT count(*) as 'result'
         from reservation
         where (#{start} &lt;= rsvstart AND #{end} &gt;= rsvend)

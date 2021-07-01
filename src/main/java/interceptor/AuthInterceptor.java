@@ -16,7 +16,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     private JwtUtil jwtUtil;
 
     @Autowired
-    @Qualifier("UserServiceImpl")
     private UserService mUserService;
 
     @Override

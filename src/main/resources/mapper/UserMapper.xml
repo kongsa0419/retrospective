@@ -30,7 +30,7 @@
     </select>
 
 
-    <select id="getOutdt" resultType="Timestamp" parameterType="long">
+    <select id="getOutdt" resultType="java.sql.Timestamp" parameterType="long">
         SELECT outdt
         from user
         where id = #{userId}

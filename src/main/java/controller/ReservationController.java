@@ -21,7 +21,6 @@ import javax.annotation.Resource;
 public class ReservationController {
 
     @Resource
-    @Qualifier("ReservationServiceImpl")
     private ReservationService mReservationService;
 
     @ResponseBody
@@ -40,7 +39,7 @@ public class ReservationController {
 
     @Auth
     @ResponseBody
-    @RequestMapping(value = "/mylist")
+    @RequestMapping(value = "/mylist", method = RequestMethod.GET)
     public ResponseEntity getListIHosted(){
         return new ResponseEntity(mReservationService.getListIHosted(), HttpStatus.OK);
     }

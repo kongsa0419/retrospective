@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 
-@Repository("UserMapper")
+@Repository
 public interface UserMapper {
     User getUserById(long id);
 

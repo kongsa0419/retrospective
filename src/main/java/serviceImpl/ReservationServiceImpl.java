@@ -20,12 +20,11 @@ import java.util.List;
 /** Auth가 온전히 작동되면, 내 예약에 한해서만 지워야함.
  *
  * */
-@Service("ReservationServiceImpl")
+@Service
 public class ReservationServiceImpl implements ReservationService {
 
 
     @Autowired
-    @Qualifier("UserServiceImpl")
     private UserService mUserService;
 
     @Autowired
